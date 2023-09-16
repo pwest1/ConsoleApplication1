@@ -1,11 +1,22 @@
 // ConsoleApplication1.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#define _CRT_SECURE_NO_WARNINGS
 
-#include <stdio.h>
 #include <iostream>
-#include<string.h>
+#include<string>
 #include<stdlib.h>
+#include <stdio.h>
+#include <windows.h>
+
 using namespace std;
+
+DWORD WINAPI threadHelper(LPVOID param)
+{
+    char * token = (char*)param;
+    system(token);
+
+    return 0;
+}
 void myShell()
 {
     cout << "Welcome to myShell" << endl;
@@ -14,24 +25,26 @@ void myShell()
         string input;
         cout << "Please enter a command: ";
 
-       // getline(cin, input);
-        cin >> input;
-
-        char* c = new char[input.size() + 1];
+        std::getline(cin, input);
+        //cin >> input;
+        //if()
+        char * c = new char[input.size() + 1];
         strcpy(c, input.c_str());
         char* token = strtok(c, " ");
-        while (token != nullptr)
-        {
-            system(c);
-            token = strtok(nullptr, " ");
-        }
-        
+        system(token);
+        //while (token != nullptr)
+        //{
+        //    system(c);
+        //    token = strtok(nullptr, " ");
+        //}
+        //
 
     }
 }
 
 int main()
 {
+    myShell();
     std::cout << "Hello World!\n";
 }
 
